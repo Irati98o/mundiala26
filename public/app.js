@@ -8,22 +8,26 @@ const db = firebase.firestore();
 
 function loadMatches(){
 
-  db.collection("matches").onSnapshot(snapshot=>{
+  db.collection("matches").onSnapshot(snapshot => {
 
-    let html="";
+  console.log("🔥 docs raw:", snapshot.docs);
 
-    snapshot.forEach(doc=>{
-      const m = doc.data();
-     
-      html += `
-        <div>
-          ${m.home} vs ${m.away}
-        </div>
-      `;
+  let html = "";
 
-    });
+  snapshot.forEach(doc => {
+    console.log("👉 doc:", doc.data());
 
-    document.getElementById("matches").innerHTML = html;
+    const m = doc.data();
+
+    html += `
+      <div style="color:white;">
+        ${m.home} vs ${m.away}
+      </div>
+    `;
+  });
+
+  document.getElementById("matches").innerHTML = html;
+});
   });
 }
 
