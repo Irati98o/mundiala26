@@ -6,6 +6,22 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-db.collection("matches").get().then(snapshot => {
-  console.log("🔥 datos:", snapshot.size);
-});
+function loadMatches(){
+
+  db.collection("matches").onSnapshot(snapshot=>{
+
+    let html="";
+
+    snapshot.forEach(doc=>{
+      const m = doc.data();
+
+      html += <div>
+        ${m.home} vs ${m.away}
+      </div>;
+    });
+
+    document.getElementById("matches").innerHTML = html;
+  });
+}
+
+loadMatches();
