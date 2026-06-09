@@ -28,7 +28,6 @@ function loadMatches(){
 
   document.getElementById("matches").innerHTML = html;
 });
-  });
 }
 
 loadMatches();
