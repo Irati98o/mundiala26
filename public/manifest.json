@@ -1,0 +1,9 @@
+{
+  "name": "Porra Mundial",
+  "short_name": "Porra",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#111",
+  "background_color": "#111"
+}
+
