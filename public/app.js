@@ -14,10 +14,13 @@ function loadMatches(){
 
     snapshot.forEach(doc=>{
       const m = doc.data();
+     
+      html += `
+        <div>
+          ${m.home} vs ${m.away}
+        </div>
+      `;
 
-      html += <div>
-        ${m.home} vs ${m.away}
-      </div>;
     });
 
     document.getElementById("matches").innerHTML = html;
