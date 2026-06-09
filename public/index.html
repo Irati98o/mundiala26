@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width">
-  <style>
-    body { background:#111; color:white; font-family:Arial }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Porra Mundial</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-<h1>🏆 Porra Mundial</h1>
-<div id="matches"></div>
+<h1>🏆 Porra Mundial 2026</h1>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+<div id="login"></div>
+
+<div id="app" style="display:none">
+
+  <h2 id="username"></h2>
+
+  <h3>⚽ Partidos</h3>
+  <div id="matches"></div>
+
+  <h3>🏆 Ranking</h3>
+  <div id="ranking"></div>
+
+  <h3>📊 Evolución</h3>
+  <canvas id="chart"></canvas>
+
+  <div id="adminPanel" style="display:none">
+    <button onclick="calculateAll()">Calcular puntos</button>
+  </div>
+
+</div>
+
 <script src="app.js"></script>
 
 </body>
 </html>
+
