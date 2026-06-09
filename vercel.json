@@ -3,13 +3,6 @@
   "routes": [
     { "src": "/", "dest": "/public/index.html" },
     { "src": "/api/(.*)", "dest": "/api/$1" }
-  ],
-
-  "crons": [
-    {
-      "path": "/api/updateMatches",
-      "schedule": "*/15 * * * *"
-    }
   ]
 }
 
