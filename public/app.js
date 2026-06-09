@@ -1,6 +1,6 @@
 const firebaseConfig = {
-  apiKey: "TU_KEY",
-  projectId: "TU_PROJECT_ID"
+  apiKey: "ko-mundiala",
+  projectId: "2026ko mundiala"
 };
 
 firebase.initializeApp(firebaseConfig);
