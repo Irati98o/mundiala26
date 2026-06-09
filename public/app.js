@@ -1,3 +1,5 @@
+document.getElementById("matches").innerHTML = "🔥 Firebase conectado";
+
 // 🔥 CONFIG FIREBASE
 const firebaseConfig = {
   apiKey: "ko-mundiala",
