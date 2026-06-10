@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { db } from "../firebase/config";
-import { collection, onSnapshot, addDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc, setDoc } from "firebase/firestore";
 import MatchCard from "../components/MatchCard";
 
 export default function Home({ user }) {
@@ -29,7 +29,8 @@ export default function Home({ user }) {
   }, []);
 
   const predict = async (matchId, prediction) => {
-    await addDoc(collection(db, "predictions"), {
+    const predictionId = `${user.id}_${matchId}`; // ✅ clave única
+    await setDoc(doc(db, "predictions", predictionId), {
       userId: user.id,
       matchId,
       prediction,
