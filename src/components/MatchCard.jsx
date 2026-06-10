@@ -21,9 +21,6 @@ export default function MatchCard({ match, onPredict, getUserPrediction }) {
         <p>🔒 Cerrado</p>
       ) : userPrediction ? (
         <p>✅ Apostado: {userPrediction.prediction}</p>
-        <div>
-          <h1>hola</h1>
-        </div>
       ) : (
         <div>
           <button className={userPrediction?.prediction === "1" ? "active" : ""} onClick={() => onPredict(match.id, "1")}>1</button>
