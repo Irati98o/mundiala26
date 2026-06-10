@@ -5,8 +5,16 @@ export default function MatchCard({ match, onPredict, getUserPrediction }) {
   const userPrediction = getUserPrediction(match.id);
   const locked = new Date() >= new Date(match.date);
 
+  let cardStyle = "card";
+
+  if (locked){
+    cardStyle += " locked";
+  } else if (userPrediction) {
+    cardStyle += " predicted";
+  }
+  
   return (
-    <div className="card">
+    <div className="cardStyle">
       <h3>{match.home} vs {match.away}</h3>
 
       {locked ? (
