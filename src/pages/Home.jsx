@@ -46,7 +46,7 @@ export default function Home({ user }) {
   return (
     <div>
       {matches.map(m => (
-        <MatchCard key={m.id} match={m} onPredict={predict} />
+        <MatchCard key={m.id} match={m} onPredict={predict} getUserPrediction={getUserPrediction}/>
       ))}
     </div>
   );
