@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function MatchCard({ match, onPredict }) {
+export default function MatchCard({ match, onPredict, getUserPrediction }) {
 
   const userPrediction = getUserPrediction(match.id);
   const locked = new Date() >= new Date(match.date);
