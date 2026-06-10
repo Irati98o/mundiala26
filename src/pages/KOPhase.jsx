@@ -1,3 +1,4 @@
+import React from "react";
 import TeamSelector from "../components/TeamSelector";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase/config";
