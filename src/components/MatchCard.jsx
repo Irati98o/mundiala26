@@ -2,6 +2,7 @@ import React from "react";
 
 export default function MatchCard({ match, onPredict }) {
 
+  const userPrediction = getUserPrediction(match.id);
   const locked = new Date() >= new Date(match.date);
 
   return (
@@ -10,6 +11,8 @@ export default function MatchCard({ match, onPredict }) {
 
       {locked ? (
         <p>🔒 Cerrado</p>
+      ) : userPrediction ? (
+        <p>✅ Apostado: {userPrediction.prediction}</p>
       ) : (
         <div>
           <button onClick={() => onPredict(match.id, "1")}>1</button>
