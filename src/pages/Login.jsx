@@ -1,36 +1,34 @@
 import React from "react";
 import { useState } from "react";
 import { db } from "../firebase/config";
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
 
 export default function Login({ setUser }) {
   const [name, setName] = useState("");
 
   const login = async () => {
-  const q = query(collection(db, "users"), where("name", "==", name));
-  const existing = await getDocs(q);
 
-  if (!existing.empty) {
-    // ✅ YA EXISTE → entrar
-    const doc = existing.docs[0];
+    const userRef = doc(db, "users", name);
+    const snapshot = await getDoc(userRef);
 
-    localStorage.setItem("userId", doc.id);
-    setUser({ id: doc.id, name });
+    if (snapshot.exists()) {
+      // ✅ Usuario ya existe → entrar
+      localStorage.setItem("userId", name);
+      setUser({ id: name, name });
+      return;
+    }
 
-    return;
-  }
+    // ✅ Usuario nuevo → crear con ID = nombre
+    await setDoc(userRef, {
+      name: name,
+      points: 0,
+      koPoints: 0,
+      isAdmin: name === "Irati"
+    });
 
-  // ✅ NO EXISTE → crear usuario nuevo
-  const docRef = await addDoc(collection(db, "users"), {
-    name,
-    points: 0,
-    koPoints: 0,
-    isAdmin: name === "Irati"
-  });
-
-  localStorage.setItem("userId", docRef.id);
-  setUser({ id: docRef.id, name });
-};
+    localStorage.setItem("userId", name);
+    setUser({ id: name, name });
+  };
 
   return (
     <div className="center">
