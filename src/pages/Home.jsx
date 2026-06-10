@@ -16,6 +16,18 @@ export default function Home({ user }) {
     return unsub;
   }, []);
 
+  const [predictions, setPredictions] = useState([]);
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, "predictions"),
+      snap => {
+        setPredictions(snap.docs.map(d => d.data()));
+      }
+    );
+    return unsub;
+  }, []);
+
   const predict = async (matchId, prediction) => {
     await addDoc(collection(db, "predictions"), {
       userId: user.id,
@@ -23,6 +35,12 @@ export default function Home({ user }) {
       prediction,
       points: 0
     });
+  };
+  
+  const getUserPrediction = (matchId) => {
+    return predictions.find(
+      p => p.userId === user.id && p.matchId === matchId
+    );
   };
 
   return (
