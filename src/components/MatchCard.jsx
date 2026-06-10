@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function MatchCard({ match, onPredict }) {
 
   const locked = new Date() >= new Date(match.date);
