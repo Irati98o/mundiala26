@@ -55,8 +55,3 @@ th, td {
   padding: 8px;
 }
 
-tr:nth-child(1),
-tr:nth-child(2) {
-  background: #14532d;
-}
-
