@@ -45,3 +45,18 @@ button.active {
   border: 1px solid #22c55e;
 }
 
+table {
+  background: #1e293b;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 8px;
+}
+
+tr:nth-child(1),
+tr:nth-child(2) {
+  background: #14532d;
+}
+
