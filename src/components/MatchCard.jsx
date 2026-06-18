@@ -5,6 +5,20 @@ export default function MatchCard({ match, onPredict, getUserPrediction }) {
   const userPrediction = getUserPrediction(match.id);
   const locked = new Date() >= new Date(match.date);
 
+  const formatDate = (timestamp) => {
+    if (!timestamp) return "";
+
+    const date = timestamp.toDate();
+
+    return date.toLocaleString("es-ES", {
+      weekday: "short",
+      day: "2-digit",
+      month: "short",
+      hour: "2-digit",
+      minute: "2-digit"  
+    });
+  };
+
   let cardStyle = "card";
 
   if (locked){
@@ -14,7 +28,10 @@ export default function MatchCard({ match, onPredict, getUserPrediction }) {
   }
   
   return (
-    <div className="cardStyle">
+    <div className={cardStyle}>
+      <div style={{fontSize:"12px", color:"#666"}}>
+        {formatDate(match.date)}
+      </div>  
       <h3>{match.home} vs {match.away}</h3>
 
       {locked ? (
