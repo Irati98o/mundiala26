@@ -21,6 +21,16 @@ export default function Leaderboard() {
     };
   }, []);
 
+  const getResult = (match) => {
+    if (!match.score) return null;
+    const home = match.score.home;
+    const away = match.score.away;
+
+    if (home > away) return "1";
+    if (home < away) return "2";
+    return "X";
+  };
+
   // ✅ calcular puntos por usuario
   const leaderboard = {};
 
@@ -48,16 +58,6 @@ export default function Leaderboard() {
   const ranking = Object.entries(leaderboard)
     .map(([userId, points]) => ({ userId, points }))
     .sort((a, b) => b.points - a.points);
-
-  const getResult = (match) => {
-    if (!match.score) return null;
-    const home = match.score.home;
-    const away = match.score.away;
-
-    if (home > away) return "1";
-    if (home < away) return "2";
-    return "X";
-  };
   
   return (
     <div>
