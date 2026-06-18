@@ -21,10 +21,12 @@ export default function MatchCard({ match, onPredict, getUserPrediction }) {
 
   let cardStyle = "card";
 
-  if (locked){
+  if (match.status == "FT"){
+    cardStyle += " finished";
+  } else if (locked) {
     cardStyle += " locked";
-  } else if (userPrediction) {
-    cardStyle += " predicted";
+  } else {
+    cardStyle += " upcoming";
   }
   
   return (
