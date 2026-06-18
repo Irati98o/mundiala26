@@ -41,6 +41,13 @@ export default function Home({ user }) {
     );
   };
 
+  const sortedMatches = [...matches].sort((a, b) => {
+    if (!a.date || !b.date) return 0;
+
+    return a.date.toDate() - b.date.toDate();
+  });
+
+
   return (
     <div>
 
@@ -64,7 +71,7 @@ export default function Home({ user }) {
       {/* 📄 CONTENIDO SEGÚN PESTAÑA */}
       {tab === "matches" && (
         <div>
-          {matches.map(m => (
+          {sortedMatches.map(m => (
             <MatchCard
               key={m.id}
               match={m}
