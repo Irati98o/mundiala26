@@ -25,13 +25,23 @@ body {
 }
 
 .card.locked {
-  background: #3f3f46;
-  opacity: 0.7;
+  background: #27272a;
+  color: #a1a1aa;
 }
 
 button.active {
   background: #22c55e;
   color: black;
   font-weight: bold;
+}
+
+.card.upcoming {
+  background: #1e3a8a;
+  border: 1px solid #3b82f6;
+}
+
+.card.finished {
+  background: #14532d;
+  border: 1px solid #22c55e;
 }
 
