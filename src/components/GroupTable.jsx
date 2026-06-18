@@ -74,11 +74,17 @@ export default function GroupTable() {
     }
   }
 
+  const groupsWith2 = ["D", "I", "J", "L"];
+
+  const clasificados = sortedTeams.slice(0, numClasificados);
+
   return (
     <div>
       <h2>Clasificación por grupos</h2>
 
-      {Object.entries(groups).map(([groupName, teams]) => {
+      {Object.entries(groups).sort(([a], [b]) => a.localeCompare(b)).map(([groupName, teams]) => {
+
+        const numClasificados = groupsWith2.includes(groupName) ? 2 : 3;
 
         const sortedTeams = Object.entries(teams)
           .map(([name, stats]) => ({
@@ -113,7 +119,8 @@ export default function GroupTable() {
               </thead>
               <tbody>
                 {sortedTeams.map((t, i) => (
-                  <tr key={t.name}>
+                  <tr key={t.name}
+                      style={{backgroundColor: i < numClasificados ? "#d4edda" : "transparent"}}>
                     <td>{i + 1}</td>
                     <td>{t.name}</td>
                     <td>{t.played}</td>
