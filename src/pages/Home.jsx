@@ -3,6 +3,7 @@ import { db } from "../firebase/config";
 import { collection, onSnapshot, doc, setDoc } from "firebase/firestore";
 import MatchCard from "../components/MatchCard";
 import Leaderboard from "../components/Leaderboard";
+import GroupTable from "../components/GroupTable";
 
 export default function Home({ user }) {
 
@@ -66,6 +67,11 @@ export default function Home({ user }) {
         >
           Clasificación
         </button>
+
+        <button onClick={() => setTab("groups")}
+          style={{ fontWeight: tab === "leaderboard" ? "bold" : "normal" }}>
+          Grupos
+        </button>
       </div>
 
       {/* 📄 CONTENIDO SEGÚN PESTAÑA */}
@@ -84,6 +90,10 @@ export default function Home({ user }) {
 
       {tab === "leaderboard" && (
         <Leaderboard />
+      )}
+
+      {tab === "groups" && (
+        <GroupTable />
       )}
 
     </div>
