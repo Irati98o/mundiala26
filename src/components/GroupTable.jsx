@@ -76,8 +76,6 @@ export default function GroupTable() {
 
   const groupsWith2 = ["D", "I", "J", "L"];
 
-  const clasificados = sortedTeams.slice(0, numClasificados);
-
   return (
     <div>
       <h2>Clasificación por grupos</h2>
