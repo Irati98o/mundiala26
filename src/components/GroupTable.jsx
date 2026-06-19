@@ -118,7 +118,7 @@ export default function GroupTable() {
               <tbody>
                 {sortedTeams.map((t, i) => (
                   <tr key={t.name}
-                      style={{backgroundColor: i < numClasificados ? "#d4edda" : "transparent"}}>
+                      style={{backgroundColor: i < numClasificados ? "#4e6b55" : "transparent"}}>
                     <td>{i + 1}</td>
                     <td>{t.name}</td>
                     <td>{t.played}</td>
