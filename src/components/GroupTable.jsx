@@ -78,7 +78,7 @@ export default function GroupTable() {
 
   return (
     <div>
-      <h2>Clasificación por grupos</h2>
+      <h2>Ekipoan sailkapena</h2>
 
       {Object.entries(groups).sort(([a], [b]) => a.localeCompare(b)).map(([groupName, teams]) => {
 
@@ -128,7 +128,7 @@ export default function GroupTable() {
                     <td>{t.gf}</td>
                     <td>{t.gc}</td>
                     <td>{t.dg}</td>
-                    <td>{t.points}</td>
+                    <td style={{fontWeight: "bold"}}>{t.points}</td>
                   </tr>
                 ))}
               </tbody>
