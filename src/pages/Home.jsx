@@ -58,19 +58,19 @@ export default function Home({ user }) {
           onClick={() => setTab("matches")}
           style={{ fontWeight: tab === "matches" ? "bold" : "normal" }}
         >
-          Partidos
+          Apostuek
         </button>
 
         <button
           onClick={() => setTab("leaderboard")}
           style={{ fontWeight: tab === "leaderboard" ? "bold" : "normal" }}
         >
-          Clasificación
+          Rankinge
         </button>
 
         <button onClick={() => setTab("groups")}
           style={{ fontWeight: tab === "leaderboard" ? "bold" : "normal" }}>
-          Grupos
+          Sailkapena
         </button>
       </div>
 
