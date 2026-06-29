@@ -16,6 +16,10 @@ export default function KOPhase() {
   // agrupar por fase
   const rounds = [
     {
+      name: "Dieciseiabos",
+      key: "R32"
+    },
+    {
       name: "Octavos",
       key: "R16"
     },
