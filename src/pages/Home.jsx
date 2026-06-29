@@ -54,12 +54,12 @@ export default function Home({ user }) {
 
       {/* 🔘 BOTONES DE PESTAÑAS */}
       <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
-        <button
+        {/* <button
           onClick={() => setTab("matches")}
           style={{ fontWeight: tab === "matches" ? "bold" : "normal" }}
         >
           Apostuek
-        </button>
+        </button> */}
 
         <button
           onClick={() => setTab("leaderboard")}
@@ -68,10 +68,10 @@ export default function Home({ user }) {
           Rankinge
         </button>
 
-        <button onClick={() => setTab("groups")}
+        {/* <button onClick={() => setTab("groups")}
           style={{ fontWeight: tab === "leaderboard" ? "bold" : "normal" }}>
           Sailkapena
-        </button>
+        </button> */}
       </div>
 
       {/* 📄 CONTENIDO SEGÚN PESTAÑA */}
