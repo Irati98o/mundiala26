@@ -4,6 +4,7 @@ import { collection, onSnapshot, doc, setDoc } from "firebase/firestore";
 import MatchCard from "../components/MatchCard";
 import Leaderboard from "../components/Leaderboard";
 import GroupTable from "../components/GroupTable";
+import KOPhase from "./KOPhase";
 
 export default function Home({ user }) {
 
@@ -72,6 +73,14 @@ export default function Home({ user }) {
           style={{ fontWeight: tab === "leaderboard" ? "bold" : "normal" }}>
           Sailkapena
         </button> */}
+
+        <button
+          onClick={() => setTab("ko")}
+          style={{ fontWeight: tab === "ko" ? "bold" : "normal" }}
+        >
+          Eliminatoriak
+        </button>
+
       </div>
 
       {/* 📄 CONTENIDO SEGÚN PESTAÑA */}
@@ -94,6 +103,10 @@ export default function Home({ user }) {
 
       {tab === "groups" && (
         <GroupTable />
+      )}
+
+      {tab == "ko" && (
+        <KOPhase user={user} />
       )}
 
     </div>
