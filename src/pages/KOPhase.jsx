@@ -1,20 +1,42 @@
-import React from "react";
-import TeamSelector from "../components/TeamSelector";
-import { addDoc, collection } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { db } from "../firebase/config";
+import { collection, onSnapshot } from "firebase/firestore";
+import Bracket from "../components/Bracket";
 
-export default function KOPhase({ user }) {
+export default function KOPhase() {
+  const [matches, setMatches] = useState([]);
 
-  const teams = ["España","Francia","Brasil","Argentina"];
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "matches"), snap => {
+      setMatches(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+    });
+    return unsub;
+  }, []);
 
-  const save = async (selected) => {
-    for (const team of selected) {
-      await addDoc(collection(db, "user_predictions_teams"), {
-        userId: user.id,
-        team
-      });
+  // agrupar por fase
+  const rounds = [
+    {
+      name: "Octavos",
+      key: "R16"
+    },
+    {
+      name: "Cuartos",
+      key: "QF"
+    },
+    {
+      name: "Semis",
+      key: "SF"
+    },
+    {
+      name: "Final",
+      key: "F"
     }
-  };
+  ];
 
-  return <TeamSelector teams={teams} save={save} />;
+  const structured = rounds.map(r => ({
+    ...r,
+    matches: matches.filter(m => m.round === r.key)
+  }));
+
+  return <Bracket rounds={structured} />;
 }
