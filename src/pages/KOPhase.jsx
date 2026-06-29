@@ -32,6 +32,10 @@ export default function KOPhase() {
       key: "SF"
     },
     {
+      name: "Final B",
+      key: "FB"
+    },
+    {
       name: "Final",
       key: "F"
     }
