@@ -54,11 +54,11 @@ export default function Leaderboard() {
     leaderboard[p.userId] += points;
   });
 
-  teamPredictions.forEach(p => {
-    const teamPoints = calculatePoints(p.teams, results);
+ // teamPredictions.forEach(p => {
+ //   const teamPoints = calculatePoints(p.teams, results);
 
-    leaderboard[p.userId] = (leaderboard[p.userId] || 0) + teamPoints;
-  });
+ //   leaderboard[p.userId] = (leaderboard[p.userId] || 0) + teamPoints;
+ // });
 
   // convertir a array y ordenar
   const ranking = Object.entries(leaderboard)
