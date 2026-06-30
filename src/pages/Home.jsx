@@ -12,6 +12,18 @@ export default function Home({ user }) {
 
   const [matches, setMatches] = useState([]);
   const [predictions, setPredictions] = useState([]);
+  const [equiposVivos, setEquiposVivos] = useState([]);
+  const puntosPorRonda = {
+    R32: 1,
+    R16: 1,
+    QF: 2,
+    SF: 3,
+    FOURTH: 4,
+    THIRD: 8,
+    SECOND: 12,
+    FIRST: 16
+  }; 
+  const [rondas, setRondas] = useState({});
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "matches"), snap => {
@@ -48,7 +60,64 @@ export default function Home({ user }) {
 
     return a.date.toDate() - b.date.toDate();
   });
+  
+  const jugadores = userTeams.map(user => {
+    const equipos = user.teams || [];
+  
+    const puntosEquipos = calcularPuntosEquipos(equipos);
+  
+    return {
+      nombre: user.id.replace("_teams", ""),
+      equipos,
+      puntosEquipos
+    };
+  });
 
+  useEffect(() => {
+    const unsub = onSnapshot(
+      doc(db, "tournamentResults", "R32"),
+      (docSnap) => {
+        if (docSnap.exists()) {
+          setEquiposVivos(docSnap.data().teams || []);
+        }
+      }
+    );
+    
+    return unsub;
+  }, []);
+
+  useEffect(() => {
+    const fases = ["R32", "R16", "QF", "SF", "FOURTH", "THIRD", "SECOND", "FIRST"];
+  
+    const unsubs = fases.map(fase =>
+      onSnapshot(doc(db, "tournamentResults", fase), snap => {
+        if (snap.exists()) {
+          setRondas(prev => ({
+            ...prev,
+            [fase]: snap.data().teams || []
+          }));
+        }
+      })
+    );
+  
+    return () => unsubs.forEach(unsub => unsub());
+  }, []);
+
+  const calcularPuntosEquipos = (equiposJugador) => {
+    let total = 0;
+  
+    Object.entries(puntosPorRonda).forEach(([fase, puntos]) => {
+      const equiposEnRonda = rondas[fase] || [];
+  
+      const aciertos = equiposJugador.filter(e =>
+        equiposEnRonda.includes(e)
+      ).length;
+  
+      total += aciertos * puntos;
+    });
+  
+    return total;
+  };
 
   return (
     <div>
@@ -84,17 +153,8 @@ export default function Home({ user }) {
       </div>
 
       {/* 📄 CONTENIDO SEGÚN PESTAÑA */}
-      {tab === "matches" && (
-        <div>
-          {sortedMatches.map(m => (
-            <MatchCard
-              key={m.id}
-              match={m}
-              onPredict={predict}
-              getUserPrediction={getUserPrediction}
-            />
-          ))}
-        </div>
+      {tab === "teams" && (
+        <UserTeams jugadores={jugadores} equiposVivos = {equiposVivos} />
       )}
 
       {tab === "leaderboard" && (
