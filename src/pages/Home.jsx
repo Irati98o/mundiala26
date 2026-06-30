@@ -4,7 +4,7 @@ import { collection, onSnapshot, doc, setDoc } from "firebase/firestore";
 import MatchCard from "../components/MatchCard";
 import Leaderboard from "../components/Leaderboard";
 import GroupTable from "../components/GroupTable";
-import KOPhase from "./KOPhase";
+import Bracket from "../components/Bracket";
 
 export default function Home({ user }) {
 
@@ -183,7 +183,7 @@ export default function Home({ user }) {
       )}
 
       {tab == "ko" && (
-        <KOPhase user={user} />
+        <Bracket rondas={rondas} />
       )}
 
     </div>
