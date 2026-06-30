@@ -49,6 +49,14 @@ export default function Leaderboard() {
     };
   }, []);
 
+  const equiposPorUsuario = {};
+  
+  userTeams.forEach(user => {
+    const nombre = user.id.replace("_teams", "");
+  
+    equiposPorUsuario[nombre] = user.teams || [];
+  });
+
   const getResult = (match) => {
     if (!match.score) return null;
     const home = match.score.home;
@@ -74,15 +82,6 @@ export default function Leaderboard() {
   
     return total;
   };
-  
-  const equiposPorUsuario = {};
-  
-  userTeams.forEach(user => {
-    const nombre = user.id.replace("_teams", "");
-  
-    equiposPorUsuario[nombre] = user.teams || [];
-  });
-
   
   // ✅ calcular puntos por usuario
   const leaderboard = {};
