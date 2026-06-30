@@ -1,26 +1,33 @@
 import React from "react";
 
-export default function Bracket({ rounds }) {
-  const renderMatch = (match) => (
-    <div className="match">
-      <div>{match.home}</div>
-      <div>{match.away}</div>
-      {match.score && (
-        <div style={{ fontSize: "12px" }}>
-          {match.score.home} - {match.score.away}
-        </div>
-      )}
-    </div>
-  );
+export default function TournamentProgress({ rondas }) {
+
+  const fasesOrdenadas = [
+    "R32",
+    "R16",
+    "QF",
+    "SF",
+    "SECOND",
+    "FIRST"
+  ];
 
   return (
-    <div style={{ display: "flex", gap: "20px" }}>
-      {rounds.map((round, i) => (
-        <div key={i}>
-          <h3>{round.name}</h3>
-          {round.matches.map((m, idx) => (
-            <div key={idx} style={{ marginBottom: "20px" }}>
-              {renderMatch(m)}
+    <div style={{ display: "flex", gap: "20px", overflowX: "auto" }}>
+      {fasesOrdenadas.map(fase => (
+        <div key={fase}>
+          <h3>{fase}</h3>
+
+          {(rondas[fase] || []).map((team, i) => (
+            <div
+              key={i}
+              style={{
+                padding: "6px",
+                marginBottom: "4px",
+                background: "#eee",
+                borderRadius: "6px"
+              }}
+            >
+              {team}
             </div>
           ))}
         </div>
