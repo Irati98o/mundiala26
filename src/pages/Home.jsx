@@ -24,6 +24,7 @@ export default function Home({ user }) {
     FIRST: 16
   }; 
   const [rondas, setRondas] = useState({});
+  const [userTeams, setUserTeams] = useState([]);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "matches"), snap => {
@@ -36,6 +37,22 @@ export default function Home({ user }) {
     const unsub = onSnapshot(collection(db, "predictions"), snap => {
       setPredictions(snap.docs.map(d => d.data()));
     });
+    return unsub;
+  }, []);
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, "user_predictions_teams"),
+      snap => {
+        setUserTeams(
+          snap.docs.map(d => ({
+            id: d.id,
+            ...d.data()
+          }))
+        );
+      }
+    );
+  
     return unsub;
   }, []);
 
@@ -60,6 +77,22 @@ export default function Home({ user }) {
 
     return a.date.toDate() - b.date.toDate();
   });
+
+  const calcularPuntosEquipos = (equiposJugador) => {
+    let total = 0;
+  
+    Object.entries(puntosPorRonda).forEach(([fase, puntos]) => {
+      const equiposEnRonda = rondas[fase] || [];
+  
+      const aciertos = equiposJugador.filter(e =>
+        equiposEnRonda.includes(e)
+      ).length;
+  
+      total += aciertos * puntos;
+    });
+  
+    return total;
+  };
   
   const jugadores = userTeams.map(user => {
     const equipos = user.teams || [];
@@ -102,22 +135,6 @@ export default function Home({ user }) {
   
     return () => unsubs.forEach(unsub => unsub());
   }, []);
-
-  const calcularPuntosEquipos = (equiposJugador) => {
-    let total = 0;
-  
-    Object.entries(puntosPorRonda).forEach(([fase, puntos]) => {
-      const equiposEnRonda = rondas[fase] || [];
-  
-      const aciertos = equiposJugador.filter(e =>
-        equiposEnRonda.includes(e)
-      ).length;
-  
-      total += aciertos * puntos;
-    });
-  
-    return total;
-  };
 
   return (
     <div>
