@@ -5,6 +5,7 @@ import MatchCard from "../components/MatchCard";
 import Leaderboard from "../components/Leaderboard";
 import GroupTable from "../components/GroupTable";
 import Bracket from "../components/Bracket";
+import UserAliveTeams from "../components/UserAliveTeams";
 
 export default function Home({ user }) {
 
@@ -12,7 +13,6 @@ export default function Home({ user }) {
 
   const [matches, setMatches] = useState([]);
   const [predictions, setPredictions] = useState([]);
-  const [equiposVivos, setEquiposVivos] = useState([]);
   const puntosPorRonda = {
     R32: 1,
     R16: 1,
@@ -106,18 +106,6 @@ export default function Home({ user }) {
     };
   });
 
-  useEffect(() => {
-    const unsub = onSnapshot(
-      doc(db, "tournamentResults", "R32"),
-      (docSnap) => {
-        if (docSnap.exists()) {
-          setEquiposVivos(docSnap.data().teams || []);
-        }
-      }
-    );
-    
-    return unsub;
-  }, []);
 
   useEffect(() => {
     const fases = ["R32", "R16", "QF", "SF", "FOURTH", "THIRD", "SECOND", "FIRST"];
@@ -166,14 +154,17 @@ export default function Home({ user }) {
         >
           Eliminatoriak
         </button>
+        
+        <button
+          onClick={() => setTab("alive")}
+          style={{ fontWeight: tab === "alive" ? "bold" : "normal" }}
+        >
+          Bizirik
+        </button>
 
       </div>
 
       {/* 📄 CONTENIDO SEGÚN PESTAÑA */}
-      {tab === "teams" && (
-        <UserTeams jugadores={jugadores} equiposVivos = {equiposVivos} />
-      )}
-
       {tab === "leaderboard" && (
         <Leaderboard />
       )}
@@ -184,6 +175,10 @@ export default function Home({ user }) {
 
       {tab == "ko" && (
         <Bracket rondas={rondas} />
+      )}
+      
+      {tab === "alive" && (
+        <UserAliveTeams jugadores={jugadores} rondas={rondas} />
       )}
 
     </div>
