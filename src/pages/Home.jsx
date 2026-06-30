@@ -9,7 +9,7 @@ import UserAliveTeams from "../components/UserAliveTeams";
 
 export default function Home({ user }) {
 
-  const [tab, setTab] = useState("matches"); // ✅ nueva pestaña
+  const [tab, setTab] = useState("leaderboard"); // ✅ nueva pestaña
 
   const [matches, setMatches] = useState([]);
   const [predictions, setPredictions] = useState([]);
