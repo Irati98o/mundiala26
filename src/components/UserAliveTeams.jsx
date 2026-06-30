@@ -34,7 +34,13 @@ export default function UserAliveTeams({ jugadores, rondas }) {
               minWidth: "220px"
             }}
           >
-            <h3>
+            <h3 style={{
+              color:
+                vivos >= 3 ? "#28a745" :
+                vivos === 2 ? "#ff9800" :
+                "#dc3545"
+              }}
+            >
               {jugador.nombre} ({vivos})
             </h3>
 
