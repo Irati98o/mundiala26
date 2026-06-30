@@ -4,11 +4,25 @@ export default function UserAliveTeams({ jugadores, rondas }) {
 
   // equipos vivos = los que siguen en la ronda más avanzada disponible
   const obtenerEquiposVivos = () => {
-    const fases = ["FIRST", "SECOND", "SF", "QF", "R16", "R32"];
+    const orden = ["R32", "R16", "QF", "SF", "SECOND", "FIRST"];
+    const tamañoRondas = {
+      R32: 32,
+      R16: 16,
+      QF: 8,
+      SF: 4,
+      SECOND: 2,
+      FIRST: 1
+    };
 
-    for (let fase of fases) {
-      if (rondas[fase] && rondas[fase].length > 0) {
-        return rondas[fase];
+    for (let i = 0; i < orden.length; i++) {
+      const fase = orden[i];
+      const siguiente = orden[ + 1];
+
+      const equiposActual = rondas[fase] || [];
+      const equiposSiguiente = rondas[siguiente] || [];
+    
+      if (!siguiente || equiposSiguiente.length < tamañoRondas[siguiente]){
+        return equiposActual;
       }
     }
     return [];
