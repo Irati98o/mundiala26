@@ -2,8 +2,6 @@ import React from "react";
 
 export default function UserAliveTeams({ jugadores, rondas }) {
 
-  console.log(rondas);
-
   // equipos vivos = los que siguen en la ronda más avanzada disponible
   const obtenerEquiposVivos = () => {
     const orden = ["R32", "R16", "QF", "SF", "SECOND", "FIRST"];
@@ -31,8 +29,6 @@ export default function UserAliveTeams({ jugadores, rondas }) {
   };
 
   const equiposVivos = obtenerEquiposVivos();
-
-  console.log(equiposVivos);
 
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
