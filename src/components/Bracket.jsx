@@ -12,7 +12,7 @@ export default function TournamentProgress({ rondas }) {
   ];
   
   const colores = {
-      R32: "#e0e0e0",
+      R32: "#949292",
       R16: "#90caf9",
       QF: "#ffb74d",
       SF: "#ba68c8",
