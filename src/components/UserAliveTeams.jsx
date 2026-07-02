@@ -16,7 +16,7 @@ export default function UserAliveTeams({ jugadores, rondas }) {
 
     for (let i = 0; i < orden.length; i++) {
       const fase = orden[i];
-      const siguiente = orden[ + 1];
+      const siguiente = orden[i + 1];
 
       const equiposActual = rondas[fase] || [];
       const equiposSiguiente = rondas[siguiente] || [];
