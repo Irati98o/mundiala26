@@ -7,8 +7,6 @@ export default function TournamentProgress({ rondas }) {
     "R16",
     "QF",
     "SF",
-    "FOURTH",
-    "THIRD",
     "SECOND",
     "FIRST"
   ];
@@ -18,8 +16,6 @@ export default function TournamentProgress({ rondas }) {
       R16: "#90caf9",
       QF: "#ffb74d",
       SF: "#ba68c8",
-      FOURTH: "#97d6e6",
-      THIRD: "#997a23",
       SECOND: "#c0c0c0",
       FIRST: "#ffd700"
   };
